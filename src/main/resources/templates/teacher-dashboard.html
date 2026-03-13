@@ -1,0 +1,112 @@
+
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Espace Professeur - EduAdmin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --primary-color: #4e73df; --secondary-color: #858796; }
+        body { background-color: #f8f9fc; font-family: 'Nunito', sans-serif; }
+        
+        /* Sidebar Style rapide */
+        .sidebar { background: linear-gradient(180deg, #4e73df 10%, #224abe 100%); min-height: 100vh; color: white; }
+        
+        /* Cards Style */
+        .stat-card { border-left: 4px solid #4e73df; border-radius: 10px; transition: 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        
+        /* Table Style */
+        .table-container { background: white; border-radius: 15px; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15); padding: 20px; }
+        .badge-note { font-size: 0.9em; padding: 8px 12px; border-radius: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="d-flex">
+    <div class="sidebar p-3 d-none d-md-block" style="width: 250px;">
+        <h4 class="text-center mb-4"><i class="fas fa-university"></i> EduAdmin</h4>
+        <hr>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+                <a th:href="@{/teacher/dashboard}" class="nav-link text-white active"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a th:href="@{/teacher/add-grade}" class="nav-link text-white"><i class="fas fa-plus-circle me-2"></i> Saisir une Note</a>
+            </li>
+            <li class="nav-item mt-4">
+                <a th:href="@{/logout}" class="nav-link text-warning"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="flex-grow-1 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3 mb-0 text-gray-800">Bienvenue, Prof. <span th:text="${teacher.name}">Nom</span></h2>
+            <a th:href="@{/teacher/add-grade}" class="btn btn-primary shadow-sm">
+                <i class="fas fa-plus fa-sm text-white-50"></i> Nouvelle Évaluation
+            </a>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card stat-card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Notes Enregistrées</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${#lists.size(grades)}">0</div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        <div class="table-container">
+            <h5 class="mb-4 text-primary font-weight-bold"><i class="fas fa-history me-2"></i> Dernières notes attribuées</h5>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Étudiant</th>
+                            <th>Matière</th>
+                            <th>Note / 20</th>
+                            <th>Commentaire</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="g : ${grades}">
+                            <td th:text="${#temporals.format(g.dateAdded, 'dd/MM/yyyy HH:mm')}">Date</td>
+                            <td class="fw-bold" th:text="${g.student.name}">Étudiant</td>
+                            <td th:text="${g.subject}">Maths</td>
+                            <td>
+                                <span class="badge bg-success badge-note" th:if="${g.score >= 10}" th:text="${g.score}">15</span>
+                                <span class="badge bg-danger badge-note" th:if="${g.score < 10}" th:text="${g.score}">8</span>
+                            </td>
+                            <td class="text-muted small" th:text="${g.comments}">Remarque...</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></button>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(grades)}">
+                            <td colspan="6" class="text-center py-4 text-muted">Vous n'avez pas encore saisi de notes.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

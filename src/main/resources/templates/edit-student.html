@@ -1,0 +1,88 @@
+
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier l'Étudiant - EduAdmin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+        .card-header {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 20px;
+            text-align: center;
+        }
+        .btn-update {
+            background-color: #3498db;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-update:hover { background-color: #2980b9; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-user-graduate me-2"></i> Modifier l'Étudiant</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="@{/admin/save-student}" th:object="${user}" method="post">
+                        
+                        <input type="hidden" th:field="*{id}" />
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nom de l'élève</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" th:field="*{name}" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Email de contact</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" th:field="*{email}" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" th:field="*{password}" />
+                        <input type="hidden" th:field="*{enabled}" />
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-update">
+                                <i class="fas fa-save me-2"></i> Enregistrer les changements
+                            </button>
+                            <a th:href="@{/admin/students}" class="btn btn-outline-secondary">
+                                Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
