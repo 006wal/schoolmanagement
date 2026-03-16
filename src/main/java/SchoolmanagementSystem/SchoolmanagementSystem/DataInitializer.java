@@ -31,22 +31,18 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        Role adminRole = roleRepository.findByName("ROLE_ADMIN")
+                .orElseGet(() -> roleRepository.save(new Role("ROLE_ADMIN")));
+
+        Role teacherRole = roleRepository.findByName("ROLE_TEACHER")
+                .orElseGet(() -> roleRepository.save(new Role("ROLE_TEACHER")));
+
+        Role studentRole = roleRepository.findByName("ROLE_STUDENT")
+                .orElseGet(() -> roleRepository.save(new Role("ROLE_STUDENT")));
+
         if (userRepository.count() == 0) {
 
-            // Créer les rôles
-            Role adminRole = new Role();
-            adminRole.setName("ROLE_ADMIN");
-            roleRepository.save(adminRole);
-
-            Role teacherRole = new Role();
-            teacherRole.setName("ROLE_TEACHER");
-            roleRepository.save(teacherRole);
-
-            Role studentRole = new Role();
-            studentRole.setName("ROLE_STUDENT");
-            roleRepository.save(studentRole);
-
-            // Créer admin
             User admin = new User();
             admin.setName("Admin");
             admin.setEmail("admin@school.com");
@@ -56,7 +52,6 @@ public class DataInitializer implements CommandLineRunner {
             admin.setRoles(adminRoles);
             userRepository.save(admin);
 
-            // Créer teacher marc
             User marc = new User();
             marc.setName("Marc");
             marc.setEmail("marc.prof@school.com");
@@ -66,7 +61,6 @@ public class DataInitializer implements CommandLineRunner {
             marc.setRoles(marcRoles);
             userRepository.save(marc);
 
-            // Créer teacher jean
             User jean = new User();
             jean.setName("Jean");
             jean.setEmail("jean@ecole.com");
@@ -76,7 +70,6 @@ public class DataInitializer implements CommandLineRunner {
             jean.setRoles(jeanRoles);
             userRepository.save(jean);
 
-            // Créer student alice
             User alice = new User();
             alice.setName("Alice");
             alice.setEmail("alice.student@school.com");
@@ -86,7 +79,6 @@ public class DataInitializer implements CommandLineRunner {
             alice.setRoles(aliceRoles);
             userRepository.save(alice);
 
-            // Créer student wall
             User wall = new User();
             wall.setName("Wall");
             wall.setEmail("wall@school.com");

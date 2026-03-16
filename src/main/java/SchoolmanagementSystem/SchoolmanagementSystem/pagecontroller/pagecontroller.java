@@ -75,7 +75,7 @@ public class pagecontroller {
             user.setEnabled(existingUser.isEnabled());
         } else {
             user.setEnabled(true);
-            Role studentRole = roleRepository.findByName("ROLE_STUDENT");
+            Role studentRole = roleRepository.findByName("ROLE_STUDENT").orElse(null);
             if (studentRole != null) {
                 user.setRoles(Collections.singleton(studentRole));
             }
@@ -120,7 +120,7 @@ public class pagecontroller {
             user.setEnabled(existingUser.isEnabled());
         } else {
             user.setEnabled(true);
-            Role teacherRole = roleRepository.findByName("ROLE_TEACHER");
+            Role teacherRole = roleRepository.findByName("ROLE_TEACHER").orElse(null);
             if (teacherRole != null) {
                 user.setRoles(Collections.singleton(teacherRole));
             }
