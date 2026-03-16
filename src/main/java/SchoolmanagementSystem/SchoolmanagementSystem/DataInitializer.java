@@ -32,6 +32,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (userRepository.count() == 0) {
+
             // Créer les rôles
             Role adminRole = new Role();
             adminRole.setName("ROLE_ADMIN");
@@ -47,6 +48,7 @@ public class DataInitializer implements CommandLineRunner {
 
             // Créer admin
             User admin = new User();
+            admin.setName("Admin");
             admin.setEmail("admin@school.com");
             admin.setPassword("admin123");
             Set<Role> adminRoles = new HashSet<>();
@@ -56,15 +58,17 @@ public class DataInitializer implements CommandLineRunner {
 
             // Créer teacher marc
             User marc = new User();
+            marc.setName("Marc");
             marc.setEmail("marc.prof@school.com");
             marc.setPassword("prof123");
-            Set<Role> teacherRoles = new HashSet<>();
-            teacherRoles.add(teacherRole);
-            marc.setRoles(teacherRoles);
+            Set<Role> marcRoles = new HashSet<>();
+            marcRoles.add(teacherRole);
+            marc.setRoles(marcRoles);
             userRepository.save(marc);
 
             // Créer teacher jean
             User jean = new User();
+            jean.setName("Jean");
             jean.setEmail("jean@ecole.com");
             jean.setPassword("jean123");
             Set<Role> jeanRoles = new HashSet<>();
@@ -74,15 +78,17 @@ public class DataInitializer implements CommandLineRunner {
 
             // Créer student alice
             User alice = new User();
+            alice.setName("Alice");
             alice.setEmail("alice.student@school.com");
             alice.setPassword("student123");
-            Set<Role> studentRoles = new HashSet<>();
-            studentRoles.add(studentRole);
-            alice.setRoles(studentRoles);
+            Set<Role> aliceRoles = new HashSet<>();
+            aliceRoles.add(studentRole);
+            alice.setRoles(aliceRoles);
             userRepository.save(alice);
 
             // Créer student wall
             User wall = new User();
+            wall.setName("Wall");
             wall.setEmail("wall@school.com");
             wall.setPassword("Wall123");
             Set<Role> wallRoles = new HashSet<>();
