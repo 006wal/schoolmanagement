@@ -31,7 +31,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    private boolean enabled;
+    private boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
