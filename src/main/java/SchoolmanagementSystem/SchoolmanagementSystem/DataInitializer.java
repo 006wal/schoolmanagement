@@ -52,6 +52,7 @@ public class DataInitializer implements CommandLineRunner {
         adminRoles.add(adminRole);
         admin.setRoles(adminRoles);
         userRepository.save(admin);
+        admin.setEnabled(true);
 
         User marc = new User();
         marc.setName("Marc");
@@ -61,6 +62,7 @@ public class DataInitializer implements CommandLineRunner {
         marcRoles.add(teacherRole);
         marc.setRoles(marcRoles);
         userRepository.save(marc);
+        marc.setEnabled(true);
 
         User jean = new User();
         jean.setName("Jean");
@@ -70,6 +72,7 @@ public class DataInitializer implements CommandLineRunner {
         jeanRoles.add(teacherRole);
         jean.setRoles(jeanRoles);
         userRepository.save(jean);
+        jean.setEnabled(true);
 
         User alice = new User();
         alice.setName("Alice");
@@ -79,6 +82,7 @@ public class DataInitializer implements CommandLineRunner {
         aliceRoles.add(studentRole);
         alice.setRoles(aliceRoles);
         userRepository.save(alice);
+        alice.setEnabled(true);
 
         User wall = new User();
         wall.setName("Wall");
@@ -88,5 +92,6 @@ public class DataInitializer implements CommandLineRunner {
         wallRoles.add(studentRole);
         wall.setRoles(wallRoles);
         userRepository.save(wall);
+        wall.setEnabled(true);
     }
 }
