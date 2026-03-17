@@ -41,52 +41,52 @@ public class DataInitializer implements CommandLineRunner {
         Role studentRole = roleRepository.findByName("ROLE_STUDENT")
                 .orElseGet(() -> roleRepository.save(new Role("ROLE_STUDENT")));
 
-        if (userRepository.count() == 0) {
+        // Vider et recréer les users proprement
+        userRepository.deleteAll();
 
-            User admin = new User();
-            admin.setName("Admin");
-            admin.setEmail("admin@school.com");
-            admin.setPassword("admin123");
-            Set<Role> adminRoles = new HashSet<>();
-            adminRoles.add(adminRole);
-            admin.setRoles(adminRoles);
-            userRepository.save(admin);
+        User admin = new User();
+        admin.setName("Admin");
+        admin.setEmail("admin@school.com");
+        admin.setPassword("admin123");
+        Set<Role> adminRoles = new HashSet<>();
+        adminRoles.add(adminRole);
+        admin.setRoles(adminRoles);
+        userRepository.save(admin);
 
-            User marc = new User();
-            marc.setName("Marc");
-            marc.setEmail("marc.prof@school.com");
-            marc.setPassword("prof123");
-            Set<Role> marcRoles = new HashSet<>();
-            marcRoles.add(teacherRole);
-            marc.setRoles(marcRoles);
-            userRepository.save(marc);
+        User marc = new User();
+        marc.setName("Marc");
+        marc.setEmail("marc.prof@school.com");
+        marc.setPassword("prof123");
+        Set<Role> marcRoles = new HashSet<>();
+        marcRoles.add(teacherRole);
+        marc.setRoles(marcRoles);
+        userRepository.save(marc);
 
-            User jean = new User();
-            jean.setName("Jean");
-            jean.setEmail("jean@ecole.com");
-            jean.setPassword("jean123");
-            Set<Role> jeanRoles = new HashSet<>();
-            jeanRoles.add(teacherRole);
-            jean.setRoles(jeanRoles);
-            userRepository.save(jean);
+        User jean = new User();
+        jean.setName("Jean");
+        jean.setEmail("jean@ecole.com");
+        jean.setPassword("jean123");
+        Set<Role> jeanRoles = new HashSet<>();
+        jeanRoles.add(teacherRole);
+        jean.setRoles(jeanRoles);
+        userRepository.save(jean);
 
-            User alice = new User();
-            alice.setName("Alice");
-            alice.setEmail("alice.student@school.com");
-            alice.setPassword("student123");
-            Set<Role> aliceRoles = new HashSet<>();
-            aliceRoles.add(studentRole);
-            alice.setRoles(aliceRoles);
-            userRepository.save(alice);
+        User alice = new User();
+        alice.setName("Alice");
+        alice.setEmail("alice.student@school.com");
+        alice.setPassword("student123");
+        Set<Role> aliceRoles = new HashSet<>();
+        aliceRoles.add(studentRole);
+        alice.setRoles(aliceRoles);
+        userRepository.save(alice);
 
-            User wall = new User();
-            wall.setName("Wall");
-            wall.setEmail("wall@school.com");
-            wall.setPassword("Wall123");
-            Set<Role> wallRoles = new HashSet<>();
-            wallRoles.add(studentRole);
-            wall.setRoles(wallRoles);
-            userRepository.save(wall);
-        }
+        User wall = new User();
+        wall.setName("Wall");
+        wall.setEmail("wall@school.com");
+        wall.setPassword("Wall123");
+        Set<Role> wallRoles = new HashSet<>();
+        wallRoles.add(studentRole);
+        wall.setRoles(wallRoles);
+        userRepository.save(wall);
     }
 }
